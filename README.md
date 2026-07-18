@@ -27,6 +27,10 @@ indexer.py                     #Build FAISS index: region crops + whole-image em
 retriever.py                   #Decompose query → region-specific search → aggregate → top-k
 
 visualize_results.py           #Render top-k results as an image grid for eyeballing
+
+vector_metadata.json
+
+vector_index.faiss
 ```
 
 **Indexer**: for each image with segmentation masks, every main garment instance (shirt, dress, pants, jacket, etc. not sub-parts like sleeve/collar) is cropped and embedded separately with CLIP. Every image, masked or not, also gets one whole-image embedding for scene/context matching. All vectors go into a FAISS flat index (cosine similarity), with metadata tracking region type, category, color, and scene per vector.
