@@ -52,7 +52,7 @@ pip install torch transformers pillow faiss-cpu numpy pycocotools scikit-learn r
 
 **Visualize results:**
 ```bash
-python visualize_results.py --index vector_index.faiss --metadata vector_metadata.json --query "A red tie and a white shirt in a formal setting" --top_k 10
+python visualize_results.py 
 ```
 
 ## Evaluation
