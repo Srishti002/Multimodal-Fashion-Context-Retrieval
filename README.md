@@ -9,7 +9,7 @@ Vanilla CLIP retrieval struggles with two things this project specifically targe
 - **Compositionality** : it can't reliably tell "red shirt, blue pants" from "blue shirt, red pants," since it embeds a whole image as one vector and a whole caption as one vector, with no binding between which color belongs to which item.
 - **Fine-grained fashion attributes** : general-purpose training doesn't distinguish garment types as precisely as a fashion-aware pipeline needs.
 
-This project fixes both **without any training or fine-tuning** — it stays fully zero-shot — by embedding each garment *region* separately instead of the whole image, and decomposing queries into per-garment sub-phrases matched against the correct region.
+This project fixes both **without any training or fine-tuning** :it stays fully zero-shot by embedding each garment *region* separately instead of the whole image, and decomposing queries into per-garment sub-phrases matched against the correct region.
 
 ## Architecture
 
