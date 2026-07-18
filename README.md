@@ -14,19 +14,19 @@ This project fixes both **without any training or fine-tuning** — it stays ful
 ## Architecture
 
 ```
-indexer/                    # Part A — builds the searchable index
-├── 01_filter_and_inspect.py    # Filter dataset to annotated images, inspect distribution
-├── 02_extract_colors.py        # Derive per-garment dominant color (Fashionpedia has no color labels)
-├── 03_build_subset.py          # Curate a color/category-balanced subset
-├── 04_classify_scenes.py       # Zero-shot scene classification (office/street/park/home/studio)
-├── 05_fetch_supplement.py      # Pexels API fetch to fix office/home scene gap
-├── 06_merge_dataset.py         # Merge into one unified dataset manifest
-└── index.py                    # Build FAISS index: region crops + whole-image embeddings
+Dataset/                          
+├── output_directory            # Contains Fashionpedia filtered images
+├── new_images                  # Images extracted from pexels (home+office)
+├── final_dataset.json          # Final dataset json file
 
-retriever/                  # Part B — the query engine
-└── query.py                    # Decompose query → region-specific search → aggregate → top-k
+results/                          
+5 queries results
 
-visualize_results.py        # Render top-k results as an image grid for eyeballing
+indexer.py                     #Build FAISS index: region crops + whole-image embeddings
+
+retriever.py                   #Decompose query → region-specific search → aggregate → top-k
+
+visualize_results.py           #Render top-k results as an image grid for eyeballing
 ```
 
 **Indexer**: for each image with segmentation masks, every main garment instance (shirt, dress, pants, jacket, etc. not sub-parts like sleeve/collar) is cropped and embedded separately with CLIP. Every image, masked or not, also gets one whole-image embedding for scene/context matching. All vectors go into a FAISS flat index (cosine similarity), with metadata tracking region type, category, color, and scene per vector.
